@@ -1,6 +1,6 @@
-create database trail;
+create database roomies;
 
-use trail;
+use roomies;
 
 create table owner(owner_id int auto_increment,namefirst varchar(40),namelast varchar(40), 
 dob date, occupation varchar(30),city varchar(40),age int,gender varchar(10),state varchar(40),
@@ -10,21 +10,21 @@ desc owner;
 
 /*alter table owner change column namefirst namefirst varchar(40);*/
 
-create table customer (customer_id int auto_increment,namefirst varchar(40),namelast varchar(40), 
+create table tenant (tenant_id int auto_increment,namefirst varchar(40),namelast varchar(40), 
 dob date, occupation varchar(30),city varchar(40),age int,gender varchar(10),state varchar(40),
-email varchar(50), isdeleted tinyint, primary key(customer_id));
+email varchar(50), isdeleted tinyint, primary key(tenant_id));
 
-desc customer;
+desc tenant;
 
 create table owner_phoneno(id int auto_increment, owner_id int, phone varchar(15), 
 isdeleted tinyint, primary key(id), foreign key(owner_id) references owner(owner_id));
 
 describe owner_phoneno;
 
-create table customer_phoneno(id int auto_increment, customer_id int, phone varchar(15), 
-isdeleted tinyint, primary key(id), foreign key(customer_id) references customer(customer_id));
+create table tenant_phoneno(id int auto_increment, tenant_id int, phone varchar(15), 
+isdeleted tinyint, primary key(id), foreign key(tenant_id) references tenant(tenant_id));
 
-describe customer_phoneno;
+describe tenant_phoneno;
 
 create table owner_address(id int auto_increment,owner_id int, address varchar(100),
  primary key(id),foreign key(owner_id) references owner(owner_id));
@@ -55,8 +55,8 @@ primary key(id), foreign key(hostel_id) references hostel(hostel_id));
 
 desc hostel_address;
 
-create table hostel_review( id int auto_increment, customer_id int, hostel_id int,
-review varchar(60), ratings decimal(2,1), primary key(id), foreign key(customer_id)references customer(customer_id),
+create table hostel_review( id int auto_increment, tenant_id int, hostel_id int,
+review varchar(60), ratings decimal(2,1), primary key(id), foreign key(tenant_id)references tenant(tenant_id),
 foreign key(hostel_id) references hostel(hostel_id));
 
 desc hostel_review;
@@ -85,8 +85,8 @@ primary key(id), foreign key(flat_id) references flat(flat_id));
 
 desc flat_address;
 
-create table flat_review( id int auto_increment, customer_id int, flat_id int,
-review varchar(60), ratings decimal(2,1), primary key(id), foreign key(customer_id)references customer(customer_id),
+create table flat_review( id int auto_increment, tenant_id int, flat_id int,
+review varchar(60), ratings decimal(2,1), primary key(id), foreign key(tenant_id)references tenant(tenant_id),
 foreign key(flat_id) references flat(flat_id));
 
 desc flat_review;
